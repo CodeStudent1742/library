@@ -42,7 +42,7 @@ public class TestsSuite {
         readerDao.save(reader1);
 
         //WHEN
-        int id = reader1.getReaderId();
+        Long id = reader1.getReaderId();
 
         //THEN
         assertNotEquals(0, id);
@@ -64,7 +64,7 @@ public class TestsSuite {
         copyDao.save(copy3);
 
         //WHEN
-        int titleId = title1.getTitleId();
+        Long titleId = title1.getTitleId();
         Title title = titleDao.findById(titleId).orElseThrow(NotFoundException::new);
         List<Copy> copies = copyDao.findCopiesByTitle(title);
         List<Copy> copiesFiltered = copies.stream()

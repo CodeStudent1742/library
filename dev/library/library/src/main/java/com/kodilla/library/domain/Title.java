@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Table(name = "TITLES")
 @AllArgsConstructor
 public class Title {
-    private int titleId;
+    private Long titleId;
     private String title;
     private String author;
     private LocalDate publicationDate;
@@ -25,6 +24,14 @@ public class Title {
         this.author = author;
         this.publicationDate = publicationDate;
     }
+
+    public Title(String title, String author, LocalDate publicationDate, List<Copy> copies) {
+        this.title = title;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.copies = copies;
+    }
+
     public Title(){
     }
 
@@ -32,7 +39,7 @@ public class Title {
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    public int getTitleId() {
+    public Long getTitleId() {
         return titleId;
     }
 
@@ -60,7 +67,7 @@ public class Title {
         return copies;
     }
 
-    public void setTitleId(int titleId) {
+    public void setTitleId(Long titleId) {
         this.titleId = titleId;
     }
 

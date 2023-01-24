@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BorrowDto {
-    private Long borrowId;
-    private LocalDate borrowDate;
-    private LocalDate returnDate;
-    private Long readerId;
-    private Long copyId;
+public class NewTitleDto {
+    private String title;
+    private String author;
+    private LocalDate publicationDate;
+    private List<Long> copiesId ;
 }

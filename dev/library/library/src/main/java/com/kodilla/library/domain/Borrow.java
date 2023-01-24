@@ -3,22 +3,17 @@ package com.kodilla.library.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Entity
 @Table(name = "BORROWS")
 @AllArgsConstructor
-
 public class Borrow {
 
-    private int borrowId;
+    private Long borrowId;
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private Reader reader;
@@ -43,7 +38,7 @@ public class Borrow {
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    public int getBorrowId() {
+    public Long getBorrowId() {
         return borrowId;
     }
     @Column(name = "BORROWED")
@@ -65,7 +60,7 @@ public class Borrow {
         return copy;
     }
 
-    public void setBorrowId(int borrowId) {
+    public void setBorrowId(Long borrowId) {
         this.borrowId = borrowId;
     }
 

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 @AllArgsConstructor
 public class Copy {
 
-    private int copyId;
+    private Long copyId;
 //    @Column(columnDefinition = "enum('AVAILABLE','IN_CIRCULATION','DAMAGED','LOST')")
     private Status status;
     private Title thisTitle;
@@ -37,7 +37,7 @@ public class Copy {
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    public int getCopyId() {
+    public Long getCopyId() {
         return copyId;
     }
 
@@ -53,7 +53,7 @@ public class Copy {
         return thisTitle;
     }
 
-    public void setCopyId(int copyId) {
+    public void setCopyId(Long copyId) {
         this.copyId = copyId;
     }
 

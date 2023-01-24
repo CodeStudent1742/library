@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CopyDto {
-    private int copyId;
+    private Long copyId;
     private Status status;
-    private Title thisTitle;
+    private Long titleId;
 }

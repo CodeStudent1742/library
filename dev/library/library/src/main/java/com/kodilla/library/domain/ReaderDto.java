@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReaderDto {
-    private int readerId;
+    private Long readerId;
     private String readerName;
     private String readerSurname;
     private LocalDate created;
-    private List<Borrow> borrows;
+    private List<Long> borrowsId ;
 }

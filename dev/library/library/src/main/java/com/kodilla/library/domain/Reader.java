@@ -1,20 +1,21 @@
 package com.kodilla.library.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
 @Entity
 @Table(name = "READERS")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Reader {
 
-    private int readerId;
+    private Long readerId;
     private String readerName;
     private String readerSurname;
     private LocalDate created;
@@ -24,7 +25,7 @@ public class Reader {
         this.readerSurname = readerSurname;
         this.created = created;
     }
-    public Reader(){
+    public Reader(String readerName, String readerSurname, LocalDate created, List<Borrow> allBorrows){
 
     }
 
@@ -32,7 +33,7 @@ public class Reader {
     @NotNull
     @GeneratedValue
     @Column(name = "ID", unique = true)
-    public int getReaderId() {
+    public Long getReaderId() {
         return readerId;
     }
     @Column(name = "READER_NAME")
@@ -57,7 +58,7 @@ public class Reader {
         return borrows;
     }
 
-    public void setReaderId(int readerId) {
+    public void setReaderId(Long readerId) {
         this.readerId = readerId;
     }
 

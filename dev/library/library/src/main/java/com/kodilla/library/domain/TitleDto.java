@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TitleDto {
-    private int titleId;
+    private Long titleId;
     private String title;
     private String author;
     private LocalDate publicationDate;
-    private List<Copy> copies = new ArrayList<>();
+    private List<Long> copiesId ;
 }

@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Transactional
 @Repository
-public interface ReaderDao extends CrudRepository<Reader,Integer> {
+public interface ReaderDao extends CrudRepository<Reader,Long> {
 
 
-    Optional<Reader> findById(int readerId);
+    Optional<Reader> findById(Long readerId);
 }

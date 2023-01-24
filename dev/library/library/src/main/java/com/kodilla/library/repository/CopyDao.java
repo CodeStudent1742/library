@@ -13,10 +13,10 @@ import java.util.Optional;
 
 @Transactional
 @Repository
-public interface CopyDao extends CrudRepository<Copy,Integer> {
+public interface CopyDao extends CrudRepository<Copy,Long> {
 
 
-    Optional<Copy> findById(int id);
+    Optional<Copy> findById(Long id);
 
     @Query
     List<Copy> findCopiesByTitle(@Param("TITLE") Title title);

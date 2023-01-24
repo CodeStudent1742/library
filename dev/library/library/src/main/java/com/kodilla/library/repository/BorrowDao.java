@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Transactional
 @Repository
-public interface BorrowDao extends CrudRepository<Borrow,Integer> {
+public interface BorrowDao extends CrudRepository<Borrow,Long> {
 }

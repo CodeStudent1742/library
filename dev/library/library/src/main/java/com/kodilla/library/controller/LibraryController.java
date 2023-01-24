@@ -23,21 +23,21 @@ public class LibraryController {
 
 
     @PostMapping(value ="reader",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addReader(@RequestBody ReaderDto readerDto) {
-        Reader reader = libraryMapper.mapToReader(readerDto);
+    public ResponseEntity<Void> addReader(@RequestBody NewReaderDto newReaderDto) {
+        Reader reader = libraryMapper.mapToNewReader(newReaderDto);
         service.saveReader(reader);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(value="title",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addTitle(@RequestBody TitleDto titleDto) {
-        Title title = libraryMapper.mapToTitle(titleDto);
+    public ResponseEntity<Void> addTitle(@RequestBody NewTitleDto newTitleDto) {
+        Title title = libraryMapper.mapToNewTitle(newTitleDto);
         service.saveTittle(title);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(value="copy")
-    public ResponseEntity<Void> addCopy(@RequestParam int titleId) throws NotFoundException {
+    public ResponseEntity<Void> addCopy(@RequestParam Long titleId) throws NotFoundException {
         Title title = service.findTitleByTitleId(titleId);
         Copy copy = new Copy(Status.AVAILABLE,title);
         service.saveCopy(copy);
@@ -45,21 +45,20 @@ public class LibraryController {
     }
 
     @PutMapping(value="copy")
-    public ResponseEntity<Void> changeBookStatus(@RequestParam int copyId, @RequestParam Status status) throws NotFoundException {
+    public ResponseEntity<CopyDto> changeBookStatus(@RequestParam Long copyId, @RequestParam Status status) throws NotFoundException {
         Copy copy = service.findCopyById(copyId);
         copy.setStatus(status);
         service.saveCopy(copy);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(libraryMapper.mapToCopyDto(copy));
     }
 
     @GetMapping(value="copy")
-    public int checkCopiesAvailableQuantity(@RequestParam int titleId) throws NotFoundException {
-        int quantity = service.findCopiesAvailableByTitleId(titleId);
-        return quantity;
+    public int checkCopiesAvailableQuantity(@RequestParam Long titleId) throws NotFoundException {
+        return service.findCopiesAvailableByTitleId(titleId);
     }
 
     @PostMapping(value="borrow")
-    public ResponseEntity<Void> bookBorrow(@RequestParam int titleId, @RequestParam int readerId) throws NotFoundException {
+    public ResponseEntity<Void> bookBorrow(@RequestParam Long titleId, @RequestParam Long readerId) throws NotFoundException {
 
         Copy copy = service.findCopyToBorrow(titleId);
         Reader reader = service.findReaderById(readerId);
@@ -70,12 +69,12 @@ public class LibraryController {
     }
 
     @PutMapping("borrow")
-    public ResponseEntity<Void> bookReturn(@RequestParam int borrowId) throws NotFoundException {
+    public ResponseEntity<BorrowDto> bookReturn(@RequestParam Long borrowId) throws NotFoundException {
         Borrow borrow = service.findBorrowById(borrowId);
         borrow.setReturnDate(LocalDate.now());
         Copy copy = borrow.getCopy();
         copy.setStatus(Status.AVAILABLE);
         service.saveBorrow(borrow);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(libraryMapper.mapToBorrowDto(borrow));
     }
 }

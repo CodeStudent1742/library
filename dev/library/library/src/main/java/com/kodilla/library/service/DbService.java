@@ -35,11 +35,11 @@ public class DbService {
         titleDao.save(title);
     }
 
-    public Copy findCopyById(int copyId) throws NotFoundException {
+    public Copy findCopyById(Long copyId) throws NotFoundException {
         return copyDao.findById(copyId).orElseThrow(NotFoundException::new);
     }
 
-    public int findCopiesAvailableByTitleId(int titleId) throws NotFoundException {
+    public int findCopiesAvailableByTitleId(Long titleId) throws NotFoundException {
         Title title = titleDao.findById(titleId).orElseThrow(NotFoundException::new);
         List<Copy> copies = copyDao.findCopiesByTitle(title);
         List<Copy> copiesFiltered = copies.stream()
@@ -49,7 +49,7 @@ public class DbService {
         return copiesAvailableByTitleId;
     }
 
-    public Borrow findBorrowById(int borrowId) throws  NotFoundException {
+    public Borrow findBorrowById(Long borrowId) throws  NotFoundException {
         return borrowDao.findById(borrowId).orElseThrow(NotFoundException::new);
     }
 
@@ -57,7 +57,7 @@ public class DbService {
         borrowDao.save(borrow);
     }
 
-    public Copy findCopyToBorrow(int titleId) throws NotFoundException {
+    public Copy findCopyToBorrow(Long titleId) throws NotFoundException {
         Title title = titleDao.findById(titleId).orElseThrow(NotFoundException::new);
         List<Copy> copies = copyDao.findCopiesByTitle(title);
         List<Copy> copiesFiltered = copies.stream()
@@ -71,11 +71,11 @@ public class DbService {
 
     }
 
-    public Reader findReaderById(int readerId) throws NotFoundException {
+    public Reader findReaderById(Long readerId) throws NotFoundException {
          return readerDao.findById(readerId).orElseThrow(NotFoundException::new);
     }
 
-    public Title findTitleByTitleId(int titleId) throws NotFoundException {
+    public Title findTitleByTitleId(Long titleId) throws NotFoundException {
         return titleDao.findById(titleId).orElseThrow(NotFoundException::new);
     }
 }
